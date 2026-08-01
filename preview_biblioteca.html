@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Vista previa — Puño y Camino [nombre provisorio]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1c1b19; --ink-soft: #26241f; --paper: #e8dfc8; --paper-dim: #d8cdae;
+  --seal: #a8321f; --jade: #5b7a63; --brass: #b6912b;
+  --font-display: 'Noto Serif SC', serif; --font-body: 'Work Sans', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; }
+body { margin:0; background: var(--ink); color: var(--paper); font-family: var(--font-body); font-size:17px; line-height:1.65; }
+a { color: var(--brass); text-decoration:none; }
+a:hover { color: var(--seal); text-decoration: underline; }
+.wrap { max-width:780px; margin:0 auto; padding:0 1.5rem; }
+.brush-rule { width:100%; height:14px; margin:2.2rem 0; background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 14'><path d='M2 7 C 60 2, 120 12, 200 6 S 340 2, 398 8' stroke='%23b6912b' stroke-width='2' fill='none' opacity='0.55'/></svg>") no-repeat center / contain; }
+.site-header { padding:3.5rem 1.5rem 2rem; text-align:center; border-bottom:1px solid rgba(232,223,200,0.12); }
+.brand { display:inline-flex; align-items:center; gap:0.9rem; text-decoration:none; color:var(--paper); }
+.site-title { font-family:var(--font-display); font-size:clamp(2.2rem,5.5vw,3.2rem); font-weight:700; letter-spacing:0.02em; margin:0; }
+.site-tagline { margin:0.6rem 0 0; font-size:0.95rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--paper-dim); opacity:0.8; }
+.site-nav { margin-top:1.6rem; display:flex; gap:1.6rem; justify-content:center; flex-wrap:wrap; font-size:0.95rem; }
+.site-nav a { color:var(--paper-dim); padding-bottom:2px; border-bottom:1px solid transparent; }
+.site-nav a:hover, .site-nav a.active { color:var(--seal); border-bottom-color:var(--seal); text-decoration:none; }
+.seal { --size:46px; height:var(--size); width:auto; min-width:var(--size); padding:0 0.4rem; flex-shrink:0; border:2.5px solid var(--seal); border-radius:3px; color:var(--seal); display:inline-flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:1.2rem; letter-spacing:0.05em; transform:rotate(-1deg); background:rgba(168,50,31,0.06); }
+.seal--sm { --size:30px; font-size:0.9rem; }
+main { padding:3rem 0 4rem; }
+.intro { color:var(--paper-dim); margin-bottom:2.5rem; }
+.post-list { list-style:none; margin:0; padding:0; }
+.post-card { display:grid; grid-template-columns:56px 1fr; gap:1.2rem; padding:1.8rem 0; border-bottom:1px solid rgba(232,223,200,0.1); }
+.post-card:first-child { padding-top:0; }
+.post-card-title { font-family:var(--font-display); font-weight:600; font-size:1.5rem; margin:0 0 0.4rem; }
+.post-card-title a { color:var(--paper); }
+.post-meta { font-size:0.82rem; color:var(--jade); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.5rem; }
+.post-excerpt { color:var(--paper-dim); margin:0; }
+.tag-pill { display:inline-block; font-size:0.72rem; padding:0.15rem 0.6rem; border:1px solid var(--jade); color:var(--jade); border-radius:100px; text-transform:uppercase; letter-spacing:0.05em; margin-right:0.4rem; margin-top:0.6rem; }
+.section-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--brass); margin:3rem 0 1rem; }
+.post-header { text-align:center; margin-bottom:2rem; }
+.post-header .seal { margin:0 auto 1.2rem; }
+.post-header h1 { font-family:var(--font-display); font-weight:700; font-size:clamp(1.9rem,4.5vw,2.6rem); margin:0 0 0.6rem; }
+.post-content h2 { font-family:var(--font-display); color:var(--brass); font-size:1.5rem; }
+.post-content blockquote { border-left:3px solid var(--seal); margin:1.6rem 0; padding:0.2rem 0 0.2rem 1.4rem; color:var(--paper-dim); font-style:italic; }
+.post-content ol { counter-reset:move; list-style:none; padding-left:0; }
+.post-content ol li { counter-increment:move; position:relative; padding-left:3rem; margin-bottom:1rem; }
+.post-content ol li::before { content:counter(move, decimal-leading-zero); position:absolute; left:0; top:0; font-family:var(--font-mono); color:var(--seal); font-size:0.85rem; border:1px solid var(--seal); border-radius:3px; padding:0.05rem 0.4rem; }
+.site-footer { text-align:center; padding:3rem 1.5rem; color:var(--paper-dim); font-size:0.85rem; border-top:1px solid rgba(232,223,200,0.1); opacity:0.75; }
+.badge-note { display:inline-block; background:var(--ink-soft); color:var(--brass); font-size:0.75rem; padding:0.3rem 0.8rem; border-radius:4px; margin-bottom:0.5rem; }
+
+.library-legend { display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.82rem; color:var(--paper-dim); margin:0 0 2.2rem; padding-bottom:1.4rem; border-bottom:1px solid rgba(232,223,200,0.1); }
+.library-legend .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:0.4rem; vertical-align:middle; }
+.dot--traduccion { background:var(--seal); }
+.dot--clasico { background:var(--brass); }
+.dot--academico { background:var(--jade); }
+.library-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:1.8rem; }
+.book-card { display:block; color:var(--paper); text-decoration:none; }
+.book-card:hover { text-decoration:none; }
+.book-card:hover .book-cover { transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,0,0,0.35); }
+.book-cover { position:relative; aspect-ratio:2/3; border-radius:2px 6px 6px 2px; background:var(--paper); color:var(--ink); padding:1.1rem 0.9rem; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s ease, box-shadow 0.2s ease; box-shadow:0 4px 10px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(0,0,0,0.06); background-image:radial-gradient(circle at 30% 20%, rgba(0,0,0,0.05), transparent 60%); }
+.book-cover::before { content:""; position:absolute; left:0; top:0; bottom:0; width:10px; border-radius:2px 0 0 2px; }
+.book-cover--traduccion::before { background:var(--seal); }
+.book-cover--clasico::before { background:var(--brass); }
+.book-cover--academico::before { background:var(--jade); }
+.book-cover-seal { align-self:flex-end; font-family:var(--font-display); font-weight:700; font-size:0.85rem; border:1.5px solid currentColor; border-radius:3px; padding:0.1rem 0.4rem; color:var(--seal); opacity:0.85; }
+.book-cover-title { font-family:var(--font-display); font-weight:700; font-size:1.15rem; line-height:1.25; margin-top:0.6rem; }
+.book-cover-author { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; opacity:0.65; margin-top:0.5rem; }
+.book-info { padding:0.9rem 0.2rem 0; }
+.book-lang { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--jade); margin:0 0 0.4rem; }
+.book-desc { font-size:0.88rem; color:var(--paper-dim); margin:0; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#">
+    <span class="seal">功夫</span>
+    <span>
+      <h1 class="site-title">Puño y Camino [nombre provisorio]</h1>
+      <p class="site-tagline">tipografía en prueba — no es el diseño final</p>
+    </span>
+  </a>
+  <nav class="site-nav">
+    <a href="#" class="active">Entradas</a>
+    <a href="#">Buscar</a>
+    <a href="#" style="color: var(--seal);">Biblioteca</a>
+    <a href="#">Formas</a>
+    <a href="#">Filosofía</a>
+    <a href="#">Historia</a>
+    <a href="#">Entrenamiento</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <span class="badge-note">↓ así se ve la página de inicio, con el listado de entradas</span>
+    <p class="intro">Notas de entrenamiento, historia y filosofía del kung fu tradicional. Un cuaderno personal abierto a quien quiera consultarlo.</p>
+
+    <ul class="post-list">
+      <li class="post-card">
+        <span class="seal seal--sm">B</span>
+        <div>
+          <p class="post-meta">09 de julio, 2026 · Filosofía</p>
+          <h2 class="post-card-title"><a href="#">Bienvenida al cuaderno</a></h2>
+          <p class="post-excerpt">Este espacio nació como un cuaderno personal de práctica de kung fu: notas después de cada clase, apuntes sobre formas...</p>
+          <div><span class="tag-pill">inicio</span><span class="tag-pill">práctica</span></div>
+        </div>
+      </li>
+      <li class="post-card">
+        <span class="seal seal--sm">L</span>
+        <div>
+          <p class="post-meta">02 de julio, 2026 · Formas</p>
+          <h2 class="post-card-title"><a href="#">La forma del puño de arco largo</a></h2>
+          <p class="post-excerpt">Desglose postura por postura de los primeros doce movimientos, con notas sobre errores comunes al girar la cadera...</p>
+          <div><span class="tag-pill">taolu</span><span class="tag-pill">principiantes</span></div>
+        </div>
+      </li>
+    </ul>
+
+    <p class="section-label">Vista de una entrada individual</p>
+    <div class="brush-rule"></div>
+
+    <article>
+      <header class="post-header">
+        <span class="seal">B</span>
+        <h1>Bienvenida al cuaderno</h1>
+        <p class="post-meta">09 de julio, 2026 · Filosofía</p>
+      </header>
+      <div class="post-content">
+        <p>Este espacio nació como un cuaderno personal de práctica de kung fu: notas después de cada clase, apuntes sobre formas y reflexiones sobre los principios detrás del movimiento.</p>
+        <h2>Un ejemplo: los primeros movimientos de una forma</h2>
+        <ol>
+          <li>Postura del jinete (<em>ma bu</em>), peso repartido al 50%, columna neutra.</li>
+          <li>Puño de la mano derecha sale en línea recta desde la cadera.</li>
+          <li>Retorno del puño con rotación completa del antebrazo.</li>
+        </ol>
+        <blockquote>El poder no vive en el brazo. Vive en la cadera que lo lanza y la respiración que lo sostiene.</blockquote>
+      </div>
+    </article>
+    <p class="section-label">Nueva sección: Biblioteca</p>
+    <div class="brush-rule"></div>
+
+    <h1 style="font-family: var(--font-display); font-weight:700; font-size: 2rem;">Biblioteca recomendada</h1>
+    <p class="intro" style="margin-bottom:2rem;">Textos de acceso libre y gratuito, filtrados por fidelidad a la escritura original china.</p>
+
+    <div class="library-legend">
+      <span><i class="dot dot--traduccion"></i> Traducción directa</span>
+      <span><i class="dot dot--clasico"></i> Clásico filosófico</span>
+      <span><i class="dot dot--academico"></i> Recurso académico</span>
+    </div>
+
+    <div class="library-grid">
+      <a class="book-card" href="#">
+        <div class="book-cover book-cover--traduccion">
+          <span class="book-cover-seal">功</span>
+          <span class="book-cover-title">Catálogo de manuales traducidos</span>
+          <span class="book-cover-author">Brennan Translation</span>
+        </div>
+        <div class="book-info">
+          <p class="book-lang">Inglés / Chino clásico</p>
+          <p class="book-desc">Traducciones directas de manuales originales, con el texto chino junto a la traducción.</p>
+        </div>
+      </a>
+      <a class="book-card" href="#">
+        <div class="book-cover book-cover--traduccion">
+          <span class="book-cover-seal">少</span>
+          <span class="book-cover-title">72 Arts of Shaolin</span>
+          <span class="book-cover-author">Trad. Jin Jing Zhong, 1934</span>
+        </div>
+        <div class="book-info">
+          <p class="book-lang">Inglés</p>
+          <p class="book-desc">Métodos de entrenamiento Shaolin, texto completo en Internet Archive.</p>
+        </div>
+      </a>
+      <a class="book-card" href="#">
+        <div class="book-cover book-cover--clasico">
+          <span class="book-cover-seal">孫</span>
+          <span class="book-cover-title">El Arte de la Guerra</span>
+          <span class="book-cover-author">Sun Zi</span>
+        </div>
+        <div class="book-info">
+          <p class="book-lang">Chino clásico / Inglés</p>
+          <p class="book-desc">Texto original junto a su traducción; base filosófica de la tradición marcial.</p>
+        </div>
+      </a>
+      <a class="book-card" href="#">
+        <div class="book-cover book-cover--academico">
+          <span class="book-cover-seal">太</span>
+          <span class="book-cover-title">Curso de Tai Chi Chuan</span>
+          <span class="book-cover-author">Universidad de Chile</span>
+        </div>
+        <div class="book-info">
+          <p class="book-lang">Español</p>
+          <p class="book-desc">Historia, principios del estilo Yang y secuencia de los primeros 24 movimientos.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>Puño y Camino [nombre provisorio] — cuaderno abierto de práctica.</p>
+</footer>
+
+</body>
+</html>

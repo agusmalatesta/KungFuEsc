@@ -1,0 +1,50 @@
+title: "El Camino del Puño"
+tagline: "Cuaderno de práctica y estudio de kung fu"
+description: >-
+  Notas de entrenamiento, historia y filosofía del kung fu tradicional.
+  Un cuaderno personal abierto a quien quiera consultarlo.
+url: "" # ej: https://tu-usuario.github.io
+baseurl: "/kungfu-blog" # nombre del repo, cambia si tu repo se llama distinto
+
+author: "Tu nombre"
+
+# --- GISCUS (sistema de comentarios) ---
+# 1. Activa "Discussions" en tu repo de GitHub (Settings > General > Features)
+# 2. Instala la app en https://github.com/apps/giscus en el repo
+# 3. Ve a https://giscus.app, llena los datos de tu repo y copia los valores generados abajo
+giscus:
+  repo: "tu-usuario/kungfu-blog"
+  repo_id: "REEMPLAZAR_repo_id"
+  category: "General"
+  category_id: "REEMPLAZAR_category_id"
+
+# --- Categorías del sitio (ajusta a tu gusto) ---
+categories_list:
+  - Formas
+  - Filosofía
+  - Historia
+  - Entrenamiento
+
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+paginate: 6
+paginate_path: "/pagina/:num/"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules

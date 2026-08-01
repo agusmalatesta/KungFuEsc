@@ -1,0 +1,60 @@
+# Biblioteca recomendada — recursos gratuitos y de acceso libre.
+# type: traduccion | clasico | academico  (define el color del lomo del libro)
+# Para agregar un libro nuevo, copia un bloque y cambia los valores.
+
+- title: "Catálogo de manuales traducidos"
+  author: "Brennan Translation"
+  lang: "Inglés / Chino clásico"
+  type: traduccion
+  description: >
+    El catálogo gratuito más completo de traducciones directas de manuales
+    marciales chinos originales, con el texto en chino junto a la traducción.
+    Incluye el Clásico del Boxeo de Qi Jiguang (1560) y la Biografía de Wang
+    Zhengnan (1676), entre decenas más.
+  url: "https://brennantranslation.wordpress.com/"
+
+- title: "72 Arts of Shaolin"
+  author: "Trad. de Jin Jing Zhong (1934)"
+  lang: "Inglés"
+  type: traduccion
+  description: >
+    Traducción completa de un texto chino de 1934 sobre métodos de
+    entrenamiento Shaolin. Descarga libre en Internet Archive.
+  url: "https://archive.org/details/authentic-shaolin-heritage-training-methods-of-72-arts-of-shaolin"
+
+- title: "Manuales de armas Ming"
+  author: "Chinese Long Sword"
+  lang: "Inglés"
+  type: traduccion
+  description: >
+    Manuales de espada y sable de la dinastía Ming traducidos e interpretados,
+    incluyendo un texto original de 1621, con referencia al manuscrito chino.
+  url: "https://www.chineselongsword.com/"
+
+- title: "El Arte de la Guerra"
+  author: "Sun Zi (孫子兵法)"
+  lang: "Chino clásico / Inglés"
+  type: clasico
+  description: >
+    El texto original en chino clásico junto a su traducción. No es un manual
+    técnico de kung fu, pero es la base filosófica de buena parte de la
+    tradición marcial china.
+  url: "https://en.wikipedia.org/wiki/The_Art_of_War"
+
+- title: "Curso de Tai Chi Chuan (estilo Yang)"
+  author: "Universidad de Chile"
+  lang: "Español"
+  type: academico
+  description: >
+    Material académico con la historia del Tai Chi Chuan, los diez principios
+    esenciales del estilo Yang y la secuencia de los primeros 24 movimientos.
+  url: "https://infolibros.org/libros-pdf-gratis/deportes/tai-chi/"
+
+- title: "Introducción al Tai Chi Chuan y Chi Kung"
+  author: "AON — Alejandro Nepote"
+  lang: "Español"
+  type: academico
+  description: >
+    Manual introductorio que cita directamente los clásicos del Tai Chi Chuan
+    y el Chi Kung, con contexto histórico y filosófico.
+  url: "https://www.oshogulaab.com/TAICHI/Introduccion-a-los-Manuales-CHIKUNG-TAICHICHUAN.pdf"

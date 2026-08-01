@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<article data-pagefind-body>
+  <header class="post-header">
+    <span class="seal">{{ page.title | slice: 0, 1 | upcase }}</span>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta">{{ page.date | date: "%d de %B, %Y" }}{% if page.categories.size > 0 %} · {{ page.categories | join: ", " }}{% endif %}</p>
+    {% if page.tags.size > 0 %}
+      <div>{% for tag in page.tags %}<span class="tag-pill">{{ tag }}</span>{% endfor %}</div>
+    {% endif %}
+  </header>
+
+  <div class="brush-rule"></div>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>
+
+<div class="brush-rule"></div>
+
+{% include comments.html %}

@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<p class="intro">Entradas archivadas bajo <strong>{{ page.category }}</strong>.</p>
+
+<ul class="post-list">
+  {% assign filtered = site.posts | where_exp: "post", "post.categories contains page.category" %}
+  {% for post in filtered %}
+  <li class="post-card">
+    <span class="seal seal--sm">{{ post.title | slice: 0, 1 | upcase }}</span>
+    <div>
+      <p class="post-meta">{{ post.date | date: "%d de %B, %Y" }}</p>
+      <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+    </div>
+  </li>
+  {% else %}
+  <p style="color: var(--paper-dim);">Todavía no hay entradas aquí. Vuelve pronto.</p>
+  {% endfor %}
+</ul>

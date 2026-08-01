@@ -1,0 +1,19 @@
+---
+layout: default
+title: Buscar
+permalink: /buscar/
+---
+
+<h1 style="font-family: var(--font-display); font-size: 2rem;">Buscar en el cuaderno</h1>
+<p style="color: var(--paper-dim);">Busca por técnica, forma, filosofía o palabra clave.</p>
+
+<div class="search-wrap">
+  <div id="pagefind-search"></div>
+</div>
+
+<script src="{{ '/pagefind/pagefind-ui.js' | relative_url }}"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    new PagefindUI({ element: "#pagefind-search", showSubResults: true });
+  });
+</script>
