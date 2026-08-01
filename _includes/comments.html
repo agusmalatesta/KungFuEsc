@@ -1,18 +1,50 @@
 <section class="comments">
   <div class="brush-rule"></div>
-  <script src="https://giscus.app/client.js"
-    data-repo="{{ site.giscus.repo }}"
-    data-repo-id="{{ site.giscus.repo_id }}"
-    data-category="{{ site.giscus.category }}"
-    data-category-id="{{ site.giscus.category_id }}"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="transparent_dark"
-    data-lang="es"
-    crossorigin="anonymous"
-    async>
-  </script>
+  <h2 class="comments-title">Comentarios</h2>
+
+  <div id="comments-auth-area"></div>
+  <form id="comments-form" class="comment-form" style="display:none;">
+    <textarea id="comments-input" placeholder="Escribe un comentario..." rows="3" required></textarea>
+    <button type="submit">Publicar</button>
+  </form>
+
+  <ul id="comments-list" class="comment-list"></ul>
+  <p id="comments-empty" class="comments-empty" style="display:none;">Todavía no hay comentarios. Sé el primero.</p>
 </section>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "{{ site.firebase.apiKey }}",
+    authDomain: "{{ site.firebase.authDomain }}",
+    projectId: "{{ site.firebase.projectId }}",
+    storageBucket: "{{ site.firebase.storageBucket }}",
+    messagingSenderId: "{{ site.firebase.messagingSenderId }}",
+    appId: "{{ site.firebase.appId }}"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  const postId = "{{ page.url | default: '/' }}";
+
+  const authArea = document.getElementById("comments-auth-area");
+  const form = document.getElementById("comments-form");
+  const input = document.getElementById("comments-input");
+  const list = document.getElementById("comments-list");
+  const emptyMsg = document.getElementById("comments-empty");
+
+  let currentUser = null;
+
+  function renderAuthArea() {
+    authArea.innerHTML = "";
+    if
