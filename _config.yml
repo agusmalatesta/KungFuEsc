@@ -13,10 +13,10 @@ author: "Tu nombre"
 # 2. Instala la app en https://github.com/apps/giscus en el repo
 # 3. Ve a https://giscus.app, llena los datos de tu repo y copia los valores generados abajo
 giscus:
-  repo: "tu-usuario/kungfu-blog"
-  repo_id: "REEMPLAZAR_repo_id"
+  repo: "agusmalatesta/KungFuEsc"
+  repo_id: "R_kgDOTqU93A"
   category: "General"
-  category_id: "REEMPLAZAR_category_id"
+  category_id: "DIC_kwDOTqU93M4DCd9U"
 
 # --- Categorías del sitio (ajusta a tu gusto) ---
 categories_list:
