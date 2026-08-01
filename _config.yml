@@ -3,15 +3,20 @@ tagline: "Cuaderno de práctica y estudio de kung fu"
 description: >-
   Notas de entrenamiento, historia y filosofía del kung fu tradicional.
   Un cuaderno personal abierto a quien quiera consultarlo.
-url: "" # ej: https://tu-usuario.github.io
-baseurl: "/KungFuEsc" # nombre del repo, cambia si tu repo se llama distinto
-
+url: "https://agusmalatesta.github.io"
+baseurl: "/KungFuEsc"
 author: "Tu nombre"
 
-# --- GISCUS (sistema de comentarios) ---
-# 1. Activa "Discussions" en tu repo de GitHub (Settings > General > Features)
-# 2. Instala la app en https://github.com/apps/giscus en el repo
-# 3. Ve a https://giscus.app, llena los datos de tu repo y copia los valores generados abajo
+# --- FIREBASE (comentarios con login de Google) ---
+firebase:
+  apiKey: "AIzaSyAqpI4twXrkT17vFGPKL9YHmC5HVnq-aLg"
+  authDomain: "kungfuesc.firebaseapp.com"
+  projectId: "kungfuesc"
+  storageBucket: "kungfuesc.firebasestorage.app"
+  messagingSenderId: "319675153582"
+  appId: "1:319675153582:web:f738dd6244e9bc3199c13f"
+
+# --- GISCUS (sistema de comentarios anterior, ya no se usa) ---
 giscus:
   repo: "agusmalatesta/KungFuEsc"
   repo_id: "R_kgDOTqU93A"
