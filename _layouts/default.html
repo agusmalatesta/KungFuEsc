@@ -29,7 +29,8 @@
       <a href="{{ '/buscar/' | relative_url }}">Buscar</a>
       <a href="{{ '/biblioteca/' | relative_url }}">Biblioteca</a>
       {% for cat in site.categories_list %}
-       <a href="{{ '/categoria/' | relative_url }}{{ cat | slugify: "ascii" }}/">{{ cat }}</a>
+      <a href="{{ '/categoria/' | relative_url }}{{ cat | slugify: "ascii" }}/">{{ cat }}</a>
+{% endfor %}
     </nav>
   </header>
 
