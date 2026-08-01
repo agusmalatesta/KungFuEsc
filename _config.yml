@@ -4,7 +4,7 @@ description: >-
   Notas de entrenamiento, historia y filosofía del kung fu tradicional.
   Un cuaderno personal abierto a quien quiera consultarlo.
 url: "" # ej: https://tu-usuario.github.io
-baseurl: "/kungfu-blog" # nombre del repo, cambia si tu repo se llama distinto
+baseurl: "/KungFuEsc" # nombre del repo, cambia si tu repo se llama distinto
 
 author: "Tu nombre"
 
