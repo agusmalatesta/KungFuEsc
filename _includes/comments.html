@@ -1,0 +1,171 @@
+<section class="comments">
+  <div class="brush-rule"></div>
+  <h2 class="comments-title">Comentarios</h2>
+
+  <div id="comments-auth-area"></div>
+  <form id="comments-form" class="comment-form" style="display:none;">
+    <textarea id="comments-input" placeholder="Escribe un comentario..." rows="3" required></textarea>
+    <button type="submit">Publicar</button>
+  </form>
+
+  <ul id="comments-list" class="comment-list"></ul>
+  <p id="comments-empty" class="comments-empty" style="display:none;">Todavía no hay comentarios. Sé el primero.</p>
+</section>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "{{ site.firebase.apiKey }}",
+    authDomain: "{{ site.firebase.authDomain }}",
+    projectId: "{{ site.firebase.projectId }}",
+    storageBucket: "{{ site.firebase.storageBucket }}",
+    messagingSenderId: "{{ site.firebase.messagingSenderId }}",
+    appId: "{{ site.firebase.appId }}"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  const postId = "{{ page.url | default: '/' }}";
+
+  const authArea = document.getElementById("comments-auth-area");
+  const form = document.getElementById("comments-form");
+  const input = document.getElementById("comments-input");
+  const list = document.getElementById("comments-list");
+  const emptyMsg = document.getElementById("comments-empty");
+
+  let currentUser = null;
+
+  function renderAuthArea() {
+    authArea.innerHTML = "";
+
+    if (currentUser) {
+      // Usuario logueado: mostramos su nombre/foto y un botón de salir
+      const wrapper = document.createElement("div");
+      wrapper.className = "auth-logged-in";
+
+      const img = document.createElement("img");
+      img.src = currentUser.photoURL || "";
+      img.alt = currentUser.displayName || "Usuario";
+      img.className = "auth-avatar";
+
+      const name = document.createElement("span");
+      name.className = "auth-name";
+      name.textContent = currentUser.displayName || currentUser.email;
+
+      const logoutBtn = document.createElement("button");
+      logoutBtn.type = "button";
+      logoutBtn.className = "auth-logout-btn";
+      logoutBtn.textContent = "Cerrar sesión";
+      logoutBtn.addEventListener("click", () => signOut(auth));
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(name);
+      wrapper.appendChild(logoutBtn);
+      authArea.appendChild(wrapper);
+
+      form.style.display = "block";
+    } else {
+      // Usuario no logueado: mostramos el botón de Google
+      const loginBtn = document.createElement("button");
+      loginBtn.type = "button";
+      loginBtn.className = "auth-google-btn";
+      loginBtn.textContent = "Iniciar sesión con Google";
+      loginBtn.addEventListener("click", () => {
+        signInWithPopup(auth, provider).catch((error) => {
+          console.error("Error al iniciar sesión:", error);
+          alert("No se pudo iniciar sesión. Intenta de nuevo.");
+        });
+      });
+
+      authArea.appendChild(loginBtn);
+      form.style.display = "none";
+    }
+  }
+
+  // Detecta cambios en el estado de autenticación (login/logout)
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    renderAuthArea();
+  });
+
+  // Envío de un nuevo comentario
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text || !currentUser) return;
+
+    try {
+      await addDoc(collection(db, "comments"), {
+        postId: postId,
+        text: text,
+        authorName: currentUser.displayName || currentUser.email,
+        authorPhoto: currentUser.photoURL || "",
+        authorUid: currentUser.uid,
+        createdAt: serverTimestamp()
+      });
+      input.value = "";
+    } catch (error) {
+      console.error("Error al publicar comentario:", error);
+      alert("No se pudo publicar el comentario. Intenta de nuevo.");
+    }
+  });
+
+  // Escucha en tiempo real los comentarios de este post, ordenados por fecha
+  const commentsQuery = query(
+    collection(db, "comments"),
+    where("postId", "==", postId),
+    orderBy("createdAt", "asc")
+  );
+
+  onSnapshot(commentsQuery, (snapshot) => {
+    list.innerHTML = "";
+
+    if (snapshot.empty) {
+      emptyMsg.style.display = "block";
+      return;
+    }
+
+    emptyMsg.style.display = "none";
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      const li = document.createElement("li");
+      li.className = "comment-item";
+
+      const header = document.createElement("div");
+      header.className = "comment-header";
+
+      const img = document.createElement("img");
+      img.src = data.authorPhoto || "";
+      img.alt = data.authorName || "Usuario";
+      img.className = "comment-avatar";
+
+      const name = document.createElement("span");
+      name.className = "comment-author";
+      name.textContent = data.authorName || "Anónimo";
+
+      header.appendChild(img);
+      header.appendChild(name);
+
+      const body = document.createElement("p");
+      body.className = "comment-text";
+      body.textContent = data.text;
+
+      li.appendChild(header);
+      li.appendChild(body);
+      list.appendChild(li);
+    });
+  }, (error) => {
+    console.error("Error al escuchar comentarios:", error);
+  });
+</script>
